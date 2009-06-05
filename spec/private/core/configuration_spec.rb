@@ -9,15 +9,8 @@ describe Webrat::Configuration do
   end
 
   it "should use Nokogiri as the parser by default" do
-    Webrat.stub!(:on_java? => false)
     config = Webrat::Configuration.new
     config.should parse_with_nokogiri
-  end
-
-  it "should not use Nokogiri as the parser when on JRuby" do
-    Webrat.stub!(:on_java? => true)
-    config = Webrat::Configuration.new
-    config.should_not parse_with_nokogiri
   end
 
   it "should open error files by default" do
@@ -98,6 +91,15 @@ describe Webrat::Configuration do
 
     it 'should default selenium browser key to *firefox' do
       @config.selenium_browser_key.should == '*firefox'
+    end
+
+    it 'should default selenium browser startup timeout to 5 seconds' do
+      @config.selenium_browser_startup_timeout.should == 5
+    end
+
+    it 'should allow overriding of the browser startup timeout' do
+      @config.selenium_browser_startup_timeout = 10
+      @config.selenium_browser_startup_timeout.should == 10
     end
   end
 

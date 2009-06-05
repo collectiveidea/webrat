@@ -1,10 +1,25 @@
 == 0.4.5 / ?
 
+* Major enhancements
+
+  * Improve performance (~2x) on JRuby by supporting Nokogiri
+  * Added support for external app servers in selenium mode (basically don't start one) (Mike Gaffney)
+
 * Minor enhancements
 
   * Added support for field_labeled_locators ending in non word characters
     lh 148 (Zach Dennis)
   * Filled in tests on click link lh 195 (diabolo)
+  * Added current_url to selenium session lh 215 (Luke Amdor)
+  * Added silence spec to selenium lh 238 (Martin Gamsjaeger aka snusnu)
+  * Added ability to configure the browser startup timeout for selenium lh 242 (Mike Gaffney, Mark Dodwell)
+  * Added delegation for field_named lh194 (pivotal labs)
+  * Added fix to keep from escaping field values in mechanize mode lh256 (jish)
+  * Adding fixes for click button/link and made the integration specs pass for the same in selenium lh254 (Ldiehl, Matthias Marschall)
+  * Adding clicking link by id in selenium mode lh221 (larrytheliquid)
+  * Adding fix for have_selector and have_xpath in descendent blocks lh234 (Thomas Jack)
+  * Adding fix for fields with labels with special characters (Thomas Jack, Mike Gaffney, Bryan Hemlkamp)
+  * Deprecated current_page lh50 (Mike Gaffney)
 
 == 0.4.4 / 2009-04-06
 
