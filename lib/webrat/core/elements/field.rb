@@ -439,7 +439,7 @@ module Webrat
     end
     
     def default_value
-      ""
+      []
     end
   end
 
