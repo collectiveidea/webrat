@@ -437,6 +437,10 @@ module Webrat
         { name => @value.collect {|value| CGI.escape(value)} }
       end
     end
+    
+    def default_value
+      ""
+    end
   end
 
 end

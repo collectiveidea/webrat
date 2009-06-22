@@ -75,7 +75,7 @@ describe "select_multiple" do
     with_html <<-HTML
       <html>
       <form method="post" action="/login">
-        <select name="month[]"><option value="1">January</option></select>
+        <select name="month[]" multiple="multiple"><option value="1">January</option></select>
         <input type="submit" />
       </form>
       </html>
@@ -85,4 +85,16 @@ describe "select_multiple" do
     click_button
   end
   
+  it "should not silently submit the first option value" do
+    with_html <<-HTML
+      <html>
+      <form method="post" action="/login">
+        <select name="month[]" multiple="multiple"><option value="1">January</option></select>
+        <input type="submit" />
+      </form>
+      </html>
+    HTML
+    webrat_session.should_receive(:post).with("/login", {})
+    click_button
+  end
 end
