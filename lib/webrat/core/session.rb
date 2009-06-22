@@ -144,7 +144,7 @@ For example:
     end
 
     def redirect? #:nodoc:
-      response_code / 100 == 3
+      (response_code / 100).to_i == 3
     end
 
     def internal_redirect?
@@ -274,7 +274,7 @@ For example:
     end
 
     def current_host
-      URI.parse(current_url).host || "www.example.com"
+      URI.parse(current_url).host || @custom_headers["Host"] || "www.example.com"
     end
 
     def response_location_host
