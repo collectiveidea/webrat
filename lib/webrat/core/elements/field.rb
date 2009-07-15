@@ -439,7 +439,12 @@ module Webrat
     end
     
     def default_value
-      []
+      selected_options = Webrat::XML.xpath_search(@element, ".//option[@selected = 'selected']")
+
+      selected_options.map do |option|
+        return "" if option.nil?
+        Webrat::XML.attribute(option, "value") || Webrat::XML.inner_html(option)
+      end.uniq
     end
   end
 

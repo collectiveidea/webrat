@@ -31,7 +31,7 @@ describe "select_multiple" do
     click_button
   end
   
-  it "should submit submit a single value" do
+  it "should submit a single value" do
     with_html <<-HTML
       <html>
       <form method="post" action="/login">
@@ -42,6 +42,41 @@ describe "select_multiple" do
     HTML
     webrat_session.should_receive(:post).with("/login", "month" => ["1"])
     select_multiple ["January"], :from => "month[]"
+    click_button
+  end
+  
+  it "should submit multiple values" do
+    with_html <<-HTML
+      <html>
+      <form method="post" action="/login">
+        <select name="month[]" multiple="multiple">
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+        </select>
+        <input type="submit" />
+      </form>
+      </html>
+    HTML
+    webrat_session.should_receive(:post).with("/login", "month" => ["1", "2"])
+    select_multiple ["January", "February"], :from => "month[]"
+    click_button
+  end
+  
+  it "should submit previously-selected values" do
+    with_html <<-HTML
+      <html>
+      <form method="post" action="/login">
+        <select name="month[]" multiple="multiple">
+          <option value="1" selected="selected">January</option>
+          <option value="2" selected="selected">February</option>
+          <option value="3">March</option>
+        </select>
+        <input type="submit" />
+      </form>
+      </html>
+    HTML
+    webrat_session.should_receive(:post).with("/login", "month" => ["1", "2"])
     click_button
   end
   
